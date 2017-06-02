@@ -3,7 +3,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Categories = sequelize.define("Categories", {
-    category_id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1
       primaryKey: true,
@@ -15,17 +15,15 @@ module.exports = function(sequelize, DataTypes) {
     description:{
       type: DataTypes.TEXT,
     },
-     img_source:{
-      type: DataTypes.STRING,
-    },
     {
       // We're saying that we want our User to have categories
     classRequired: {
         associate: function(models) {
-          // An User (foreignKey) is required or a category can't be made
+          // An User (foreignKey) is required only for user defined category,
+          // so null is allowed for standardized categories
           Categories.belongsTo(models.Users, {
             foreignKey: {
-              allowNull: false
+              allowNull: true
     },
     {
       // We're saying that we want our Categories to have budgets, expenditures

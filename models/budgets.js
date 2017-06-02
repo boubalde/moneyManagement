@@ -3,7 +3,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Budgets = sequelize.define("Budgets", {
-    budget_id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true,
@@ -48,5 +48,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   
-);
- return Budgets;
+};
+return Budgets;

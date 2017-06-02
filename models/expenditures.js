@@ -35,5 +35,5 @@ module.exports = function(sequelize, DataTypes) {
           Expenditures.belongsTo(models.Categories, {
             foreignKey: {
               allowNull: false
-    },
+    };
   return Expenditures;

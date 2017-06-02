@@ -3,7 +3,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
-    user_id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV1,
       primaryKey: true,
