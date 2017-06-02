@@ -10,6 +10,9 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       allowNull: false
     },
+    category_name: {
+      type:DataTypes.STRING,
+    }
     description: {
       type: DataTypes.TEXT,
     }
