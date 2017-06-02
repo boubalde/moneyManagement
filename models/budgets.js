@@ -9,8 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
       allowNull: false
-      // autoIncrement: true
     },
+    budget_name: {
+    type:DataTypes.STRING,
+     },
     start_date: {
       type: DataTypes.DATE,
     },

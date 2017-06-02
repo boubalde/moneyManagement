@@ -1,61 +1,61 @@
-// // this is the api route for expenditures
-
-// var db = require("../models");
-
-// module.exports = function(app) {
-
-//   //Find all the Expenditures
-//   app.get("/api/expenditures", function(req, res) {
-//     db.Expenditures.findAll({
-//     }).then(function(dbExpenditures) {
-//       res.json(dbExpenditures);
-//     });
-//   });
+var express = require("express");
+// var bodyParser = require("body-parser");
+var router = express.Router();
+// grabbing our models
+var db = require("../models");
 
 
-// //Get route for retrieving a single expenditure
-//   app.get("/api/expenditures/:id", function(req, res) {
-//     // Here we add an "include" property to our options in our findOne query
-//     // We set the value to an array of the models we want to include in a left outer join
-//     // In this case, the Expenditures, and the expenditures
-//     db.Expenditures.findOne({
-//       where: {
-//         id: req.params.id
-//       },
-//     }).then(function(dbExpenditures) {
-//       res.json(dbExpenditures);
-//     });
-//   });
 
-// // create a new expenditure
-//   app.post("/api/expenditures", function(req, res) {
-//     db.Expenditures.create(req.body).then(function(dbExpenditures) {
-//       res.json(dbExpenditures);
-//     });
-//   });
+// get route, edited to match sequelize
+router.get("/expenditures", function(req, res) {
+ 
+  db.Expenditures.findAll({})
+  // use promise method to pass the Expenditures...
+  .then(function(dbExpenditures) {
+    var hbsObject = {
+      Expenditures: dbExpenditures
+    };
+    console.log(dbExpenditures);
+    console.log("list of all the Expenditures");
+    return res.render("index", hbsObject);
+    
+  });
+});
 
-//   // delete a expenditure
-//   app.delete("/api/expenditures/:id", function(req, res) {
-//     db.Expenditures.destroy({
-//       where: {
-//         id: req.params.id
-//       }
-//     }).then(function(dbExpenditures) {
-//       res.json(dbExpenditures);
-//     });
-//   });
 
-//   // update a expenditure
-//   app.put("/api/expenditures", function(req, res) {
-//     db.Post.update(
-//       req.body,
-//       {
-//         where: {
-//           id: req.body.id
-//         }
-//       }).then(function(dbExpenditures) {
-//         res.json(dbExpenditures);
-//       });
-//   });
+// post route to create expenditure
+router.post("/expenditures/create", function(req, res) {
+  console.log(req.body)
 
-// };
+  // edited burger create to add in a burger_name
+  db.Expenditures.create({
+    date_: req.body.date_
+    amt_spent:req.body.amt_spent
+    classMethods:req.body.classMethods
+  })
+  // pass the result of our call
+  .then(function(dbExpenditures) {
+    // log the result to our terminal/bash window
+    console.log(dbExpenditures);
+    // redirect
+    res.redirect("/");
+  });
+});
+
+
+ // DELETE
+  router.delete("/expenditures/delete/:id", function(req, res) {
+    db.Expenditures.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(dbExpenditures) {
+      res.json(dbExpenditures);
+    });
+  });
+
+module.exports = router;
+
+
+
