@@ -1,52 +1,37 @@
-// budgets models (table)
+// Budgets models
+
 
 
 module.exports = function(sequelize, DataTypes) {
   var Budgets = sequelize.define("Budgets", {
     budget_id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV1,
+      defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
       allowNull: false
+      // autoIncrement: true
     },
-    // category_id:{
-    //   type: DataTypes.UUID,
-    // },
-    //  user_id:{
-    //   type: DataTypes.UUID,
-    // },
-     start_date:{
+    start_date: {
       type: DataTypes.DATE,
     },
-     end_date:{
+    end_date: {
       type: DataTypes.DATE,
     },
-    amt_budgeted:{
+    amt_budgeted: {
       type: DataTypes.INTEGER,
     }
-
-   
-      // We're saying that we want our category to have a budget
-   classRequired: {
+  }, {
+    classMethods: {
       associate: function(models) {
-          // An category (foreignKey) is required or a budget can't be made
-          Budgets.belongsTo(models.Categories, {
-            foreignKey: {
-              allowNull: false
-            },
+        Budgets.belongsTo(models.Categories);
+        Budgets.belongsTo(models.Users);
+        Budgets.hasMany(models.Expenditures);
 
-  
-      // We're saying that we want our Budgets to have expenditures, expenditures
-  classMethods: {
-        associate: function(models) {
-          // Associating Budgets with expenditures
-          // When an Budgets is deleted, also delete any associated expenditures
-                Budgets.hasMany(models.Expenditures, {
-            onDelete: "cascade"
-          });
-        
       }
     }
-  
-);
- return Budgets;
+  });
+  console.log(Budgets);
+  return Budgets;
+};
+
+
