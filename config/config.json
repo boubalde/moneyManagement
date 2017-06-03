@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "forever",
-    "database": "newuser",
-    "host": "localhost",
+    "password": "sq5rel9%Top",
+    "database": "money_manage",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
