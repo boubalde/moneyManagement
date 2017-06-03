@@ -3,7 +3,7 @@
 
 	<div class="row">
 
-		<div class = "col-md-12">
+		<div class = "col-md-8">
 
 			<img class = "img-large" src="assets/img/bank.jpg" alt="image not available">
 			<!-- <img class= "img-large" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRjLfTIrZnFsN2o9yJjgKXwdAZ4PlJ4gQqkq-LJmEi56_b0ihQ" alt="image not available"> -->
@@ -11,42 +11,53 @@
 
 		</div>
 
-		</div class="col-md-12">
-			<!-- <form action="/action_page.php"> -->
+	<div>
 
-			<form action="/" method="POST">
-			<strong>Select category:</strong><span>
-			<select name="category">
-				{{#each category}}
-					<option value="{{cat_id}}">{{description}}</option>
-				{{/each}}
-			</select></span>
-			<strong>Enter start date:</strong><span>
-			<input type="date" name="start_date" required></span>
-			<strong>Enter end date:</strong><span>
-			<input type="date" name="end_date" required></span>
-			<span><strong>Enter budget amount:</strong></span>
-			<input type="text" name="budget_amt" required></span><br><br>
+	<div class="container">
+	    <form action="/" method="POST">
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Select category: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
 
-			<center><button class="button" type="submit">Submit</button></center> <!-- </span> -->
-			</form>
-		<div>
+					<select name="category" style="min-width: 180px" required>
+							
+						{{#each category}}
+							<option value = "{{cat_id}}">{{description}}</option>
+						{{/each}}
 
-	</div>
-
-{{!-- 	<h4>And New Category</h4>
-	<div class = "row">
-		<div class = "col-md-6">
-
-			<form class="create-update-form" action="/" method="POST">
-				<div class="form-group">
-					<input type="text" id="bur" name="name"><br>
-					<label for="bur">Enter custom category name:</label>
+					</select>
 				</div>
+				<div class="col-md-2">
+					<strong>Start date:</strong>
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="start_date" required>
+				</div>
+		    </div>
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Enter budgeted amount: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
+		        	<input type="text" name="amt_budgeted" required>
 
-				<button type = "submit">Submit</button>
-			</form>
-		</div>
+				</div>
+				<div class="col-md-2 indent1">
+					<strong>End date:</strong>
+
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="end_date" required>
+				</div>
+		    </div>
+			<div class="row">
+				<div class="col-md-8">
+					<center><button class="button" type="submit">Submit</button></center>
+				</div>
+			</div>
+	    </form>
 	</div>
- --}}
- </div>
+
+</div>
