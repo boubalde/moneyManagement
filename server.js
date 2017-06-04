@@ -27,17 +27,17 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/users_controller");
+var routes = require("./controllers/categories_controller");
 
 app.use("/", routes);
 app.use("/update", routes);
 app.use("/create", routes);
-app.use("/users", routes)
+//app.use("/users", routes)
 
 
 // listen on port 3000
 var port = process.env.PORT || 3000;
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync().then(function() {
   app.listen(port);
 });
 

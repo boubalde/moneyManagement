@@ -29,11 +29,9 @@ router.post("/budgets/create", function(req, res) {
 
   // edited burger create to add in a burger_name
   db.Budgets.create({
-    category_name: req.body.category_name
-    start_date:req.body.start_date
-    end_date:req.body.end_date
-    amt_budgeted:req.body.amt_budgeted
-    classMethods:req.body.classMethods
+    start_date:req.body.start_date;
+    end_date:req.body.end_date;
+    amt_budgeted:req.body.amt_budgeted;
   })
   // pass the result of our call
   .then(function(dbBudgets) {

@@ -1,1 +1,63 @@
-{{!-- the layout of the main page with buttons  --}}
+<div class="container">
+	<div class = "row">
+
+		<h1>Money Management Helper</h1>
+	</div>
+
+	<div class = "row">
+		<div class = "col-md-12">
+
+			<img class = "img-large" src="assets/img/bank.jpg" alt="image not available">
+
+		</div>
+	
+	<div>
+	<div class="row">
+	    <form action="/" method="POST">
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Select category: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
+
+					<select name="category" style="min-width: 180px" required>
+							
+						{{#each category}}
+							<option value = "{{cat_id}}">{{description}}</option>
+						{{/each}}
+
+					</select>
+				</div>
+				<div class="col-md-2">
+					<strong>Start date:</strong>
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="start_date" required>
+				</div>
+		    </div>
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Enter budgeted amount: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
+		        	<input type="text" name="amt_budgeted" required>
+
+				</div>
+				<div class="col-md-2">
+					<strong>End date:</strong>
+
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="end_date" required>
+				</div>
+		    </div>
+			<div class="row">
+				<div class="col-md-8">
+					<center><button class="button" type="submit">Submit</button></center>
+				</div>
+
+			</div>
+	    </form>
+    </div>
+</div>
+
