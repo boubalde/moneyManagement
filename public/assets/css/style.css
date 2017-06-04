@@ -1,8 +1,46 @@
-.img-large{
-	align-items: center;
+.indent1{
+	padding-left: 50px;
+}
+li {
+  padding: 5px;
+  margin: 5px;
+  background: #faebd7;
 }
 
-.indent1{
-	padding-left: 60px;
+.label {
+  font-weight: bold;
+}
 
+.create-update-form {
+  padding: 5px;
+  margin: 5px;
+/*  background: aqua;
+*/}
+
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+img{
+	display: block;
+	margin: auto;
+	width: 20%;
+}
+h1{
+	text-align: center;
+}
+
+h4{
+	text-align: center
+}
+.img-large{
+  display: block;
+  margin: auto;
+  width: 40%;
+  padding-bottom: 20px;
+}
+
+.button{
+  margin-top: 20px;
 }
