@@ -1,143 +1,64 @@
-      <nav>
-        <!-- Color must go before nav-wrapper or breaks navigation -->
-        <div class="blue-grey darken-2 nav-wrapper">
-          <a href="#!" class="brand-logo"><span class="logo grey-text text-lighten-2">Douglas Berg - Freelance Design</span></a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#">Services</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li><a href="#">Services</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-      </nav >
+<div class="container">
+	<div class = "row">
 
-      <!-- Parallax Hero Image with text overlay -->
-      <div class="parallax-container">
-        <!-- <div class="container"> -->
-          <div class="row">
-            <div class="col l8 s12 white-text">
-              <h4 class="thin-text left-align valign">"If you do not know how to take care for money, money will stay away from you." _ Robert T.Kiyosaki</h4>
-            </div>
-          </div>
-        </div>
-        <div id="smaller" class="parallax"><img class="sm" src="http://i927.photobucket.com/albums/ad113/yamiejung36/Day%20aa/kkr48.jpg"></div>
-      </div>
+		<h1>Money Management Helper Index</h1>
+	</div>
 
-      <!-- Services Section -->
-      <div class="container">
-      <div class="row">
-        <div class="row">
-          <div class="col s12 m4 l3 espace">
-            <div class="card">
-              <div class="card-image">
-                <img src="http://a.dryicons.com/img/is/grey-moonlight-icons_full-preview-1230.jpg">
-                <span class="card-title">Card Title</span>
-              </div>
-              <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
-              </div>
-              <div class="card-action">
-                <a href="#">Add</a> <a href="#">Edit</a> <a href="#">See All</a>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="row"> -->
-            <div class="col s12 m4 l3 espace">
-              <div class="card">
-                <div class="card-image">
-                  <img src="http://www.saminray.com/images/accounting.jpg">
-                  <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of information.
-                  I am convenient because I require little markup to use effectively.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">Add</a> <a href="#">Edit</a> <a href="#">See All</a>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row"> -->
-              <div class="col s12 m4 l3 espace">
-                <div class="card">
-                  <div class="card-image">
-                    <img src="http://www.fpnote.net/wp-content/uploads/2017/02/coin-1549053_1280.jpg">
-                    <span class="card-title">Card Title</span>
-                  </div>
-                  <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                    I am convenient because I require little markup to use effectively.</p>
-                  </div>
-                  <div class="card-action">
-                    <a href="#">Add</a> <a href="#">Edit</a> <a href="#">See All</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+	<div class = "row">
+		<div class = "col-md-12">
 
+			<img class = "img-large" src="assets/img/bank.jpg" alt="image not available">
 
-     <div class="container">
-  <div class = "row">
+		</div>
+	
+	<div>
+	<div class="row">
+	    <form action="/" method="POST">
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Select category: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
 
-    <h2>Add a Budget</h2>
-  </div>
+					<select name="category" style="min-width: 180px" required>
+							
+						{{#each category}}
+							<option value = "{{cat_id}}">{{description}}</option>
+						{{/each}}
 
-  <div class="row">
-      <form action="/" method="POST">
-        <div class="row">
-            <div class="input-field col s12">
-              <select>
-                {{#each category}}
-                 <option value="{{cat_id}}" disabled selected required="">Select Category{{description}} </option>
-            {{/each}}
-          </select>
-            </div>
+					</select>
+				</div>
+				<div class="col-md-2" class="indent1">
+					<strong>Start date:</strong>
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="start_date" required>
+				</div>
+		    </div>
+		    <div class="row">
+		        <div class="col-md-2">
+					<strong> Enter budgeted amount: </strong><br><br>
+		        </div>
+		        <div class="col-md-2">
+		        	<input type="text" name="amt_budgeted" required>
 
+				</div>
+				<div class="col-md-2" class="indent1">
+					<strong>End date:</strong>
 
-            <div class="row">
-              <form class="col s12">
-                   <div class="row">               
-                       <label>Start date:</label>    
-                       <input type="date" class="datepicker" name="start_date" required="">    
-                  </div>            
-              </form>       
-          </div>
-        
-        <div class="row">
-              <div class="input-field col s12">
-                  <input id="amt_budgeted" type="text" class="validate" name="amt_budgeted" required="">
-                  <label for="amt_budgeted">Enter budget amount</label>
-              </div>
-            </div>
+				</div>
+				<div class="col-md-2">
+					<input type="date" name="end_date" required>
+				</div>
+		    </div>
+			<div class="row">
+				<div class="col-md-8">
+					<center><button class="button" type="submit">Submit</button></center>
+				</div>
 
-          <div class="row">
-              <form class="col s12">
-                   <div class="row">               
-                       <label>End date:</label>    
-                       <input type="date" class="datepicker" name="end_date" required="">    
-                  </div>            
-              </form>       
-          </div>
+			</div>
+	    </form>
 
-          <div class="row">
-          <div class="col-md-8">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-              </button>
-            </div>
-          </div>
-    
-      </form>
     </div>
 </div>
 
