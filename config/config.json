@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "sq5rel9%Top",
+    "password": "forever",
     "database": "money_manage",
     "host": "127.0.0.1",
     "dialect": "mysql"
