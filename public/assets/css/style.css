@@ -1,4 +1,16 @@
 
+.indent1{
+	margin-left: 50px;
+
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+  background: #faebd7;
+}
+
+
 .bo{
   background: #64ffda;
 }
@@ -34,6 +46,12 @@ body {
 .card-image {
   height: 20px;
 }
+
+h2{
+  margin-top: 10px;
+  text-align: center;
+}
+
 .parallax-container{
   height:5%;
 }
@@ -43,9 +61,26 @@ body {
   width: 100%;
    }
 
+
 .parallax-container {
   height: 30px;
 }
+
+.img-large{
+  display: block;
+  margin: auto;
+  width: 50%;
+  padding-bottom: 10px;
+}
+
+.button{
+  margin-top: 20px;
+}
+.spending-list{
+  padding-top: 20px;
+
+}
+
 
 #navbar{
   height: 100px;
@@ -61,3 +96,4 @@ body {
 .picture{
   height: 100px;
 }
+
