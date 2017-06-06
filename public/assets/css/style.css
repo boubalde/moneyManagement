@@ -1,6 +1,8 @@
 .indent1{
-	padding-left: 50px;
+	margin-left: 50px;
+
 }
+
 li {
   padding: 5px;
   margin: 5px;
@@ -30,6 +32,10 @@ img{
 h1{
 	text-align: center;
 }
+h2{
+  margin-top: 10px;
+  text-align: center;
+}
 
 h4{
 	text-align: center
@@ -37,10 +43,14 @@ h4{
 .img-large{
   display: block;
   margin: auto;
-  width: 40%;
-  padding-bottom: 20px;
+  width: 50%;
+  padding-bottom: 10px;
 }
 
 .button{
   margin-top: 20px;
+}
+.spending-list{
+  padding-top: 20px;
+
 }

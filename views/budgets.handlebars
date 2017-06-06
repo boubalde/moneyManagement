@@ -8,21 +8,13 @@
 				<img class = "img-large" src="/assets/img/bank.jpg" alt="image not available">
 			</div>
 			<div class="row">
-				<h2>Expenditures</h2>
+				<h2>Budgets</h2>
 			</div>
 		</div>
 	
 
 	</div>
 
-{{!-- 	<div class = "row">
-		<div class="col-md-10">
-
-			<img class = "img-large" src="assets/img/bank.jpg" alt="image not available">
-
-		</div>
- 		<div class="clearfix"></div>
-	<div> --}}
 	<div class="row">
 	    <form action="/" method="POST">
 		    <div class="row">
@@ -40,27 +32,27 @@
 					</select>
 				</div>
 				<div class="col-md-2" class="indent1">
-					<strong>Date spent:</strong>
+					<strong>Start date:</strong>
 				</div>
 				<div class="col-md-2">
-					<input type="date" name="date_spent" required>
+					<input type="date" name="start_date" required>
 				</div>
 		    </div>
 		    <div class="row">
 		        <div class="col-md-2 col-md-offset-1">
-					<strong> Amount spent: </strong><br><br>
+					<strong> Enter budgeted amount: </strong><br><br>
 		        </div>
 		        <div class="col-md-2">
-		        	<input type="text" name="amt_spent" required>
+		        	<input type="text" name="amt_budgeted" required>
 
 				</div>
-{{!-- 				<div class="col-md-2" class="indent1">
+				<div class="col-md-2" class="indent1">
 					<strong>End date:</strong>
 
 				</div>
 				<div class="col-md-2">
 					<input type="date" name="end_date" required>
-				</div> --}}
+				</div>
 		    </div>
 			<div class="row">
 				<div class="col-md-10">
@@ -72,9 +64,9 @@
 	<div>
 
 	<div class="row">
-	    <div class="col-md-10" id="spending-list">
+	    <div class="col-md-10" id="budget-list">
 
-	    	<h4>Spending List</h4>
+	    	<h4>Budget List</h4>
 
 	    </div>
 
