@@ -1,46 +1,63 @@
-.indent1{
-	padding-left: 50px;
+
+.bo{
+  background: #64ffda;
 }
-li {
-  padding: 5px;
-  margin: 5px;
-  background: #faebd7;
+#green{
+  background: green;
 }
 
-.label {
-  font-weight: bold;
+/*.try{
+  background:pink;
+}*/
+
+body {
+  /*min-height: 100vh;*/
+  background:#880e4f;
+}
+.plese{
+  background:green;
 }
 
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-/*  background: aqua;
-*/}
-
-
-.form-group {
-  margin-bottom: 5px;
+.page-footer{
+  background:#546e7a;
+}
+.grey-text{
+  color: :white;
+}
+.main-card {
+  height: 80px;
 }
 
-img{
-	display: block;
-	margin: auto;
-	width: 20%;
+.card { width:100%;
+  overflow: auto;
 }
-h1{
-	text-align: center;
+.card-image {
+  height: 20px;
 }
-
-h4{
-	text-align: center
-}
-.img-large{
-  display: block;
-  margin: auto;
-  width: 40%;
-  padding-bottom: 20px;
+.parallax-container{
+  height:5%;
 }
 
-.button{
-  margin-top: 20px;
+.parallax-container img { 
+  height: 100px;
+  width: 100%;
+   }
+
+.parallax-container {
+  height: 30px;
+}
+
+#navbar{
+  height: 100px;
+}
+
+.div.card-action{
+  height: 53px;
+  width: 300px;
+}
+#smaller{
+  max-height: 50%;
+}
+.picture{
+  height: 100px;
 }
