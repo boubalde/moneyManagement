@@ -1,3 +1,4 @@
+
 .indent1{
 	margin-left: 50px;
 
@@ -9,37 +10,62 @@ li {
   background: #faebd7;
 }
 
-.label {
-  font-weight: bold;
+
+.bo{
+  background: #64ffda;
+}
+#green{
+  background: green;
 }
 
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-/*  background: aqua;
-*/}
+/*.try{
+  background:pink;
+}*/
 
-
-.form-group {
-  margin-bottom: 5px;
+body {
+  /*min-height: 100vh;*/
+  background:#880e4f;
+}
+.plese{
+  background:green;
 }
 
-img{
-	display: block;
-	margin: auto;
-	width: 20%;
+.page-footer{
+  background:#546e7a;
 }
-h1{
-	text-align: center;
+.grey-text{
+  color: :white;
 }
+.main-card {
+  height: 80px;
+}
+
+.card { width:100%;
+  overflow: auto;
+}
+.card-image {
+  height: 20px;
+}
+
 h2{
   margin-top: 10px;
   text-align: center;
 }
 
-h4{
-	text-align: center
+.parallax-container{
+  height:5%;
 }
+
+.parallax-container img { 
+  height: 100px;
+  width: 100%;
+   }
+
+
+.parallax-container {
+  height: 30px;
+}
+
 .img-large{
   display: block;
   margin: auto;
@@ -54,3 +80,20 @@ h4{
   padding-top: 20px;
 
 }
+
+
+#navbar{
+  height: 100px;
+}
+
+.div.card-action{
+  height: 53px;
+  width: 300px;
+}
+#smaller{
+  max-height: 50%;
+}
+.picture{
+  height: 100px;
+}
+
