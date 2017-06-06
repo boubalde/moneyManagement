@@ -32,6 +32,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  console.log(Budgets);
+  // console.log(Budgets);
   return Budgets;
 };

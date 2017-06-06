@@ -1,26 +1,51 @@
 // Users models
 
 
-module.exports = function(sequelize, DataTypes) {
-  var Users = sequelize.define("Users", {
-      user_id:{
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV1,
-      primaryKey: true,
-      allowNull: false
-    },
-    first_name: {
-      type: DataTypes.STRING,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-    },
-    email_address: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.STRING,  
-    }
+module.exports = function(sequelize, Sequelize) {
+var Users = sequelize.define("Users", {
+
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: Sequelize.INTEGER
+        },
+
+        firstname: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+
+        lastname: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+
+        username: {
+            type: Sequelize.STRING,
+            notEmpty: true
+        },
+
+        email: {
+            type: Sequelize.STRING,
+            validate: {
+                isEmail: true
+            }
+        },
+        password: {
+            type: Sequelize.STRING,
+            allowNull: false
+
+        },
+        last_login: {
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
+        },
+
+        status: {
+            type: Sequelize.ENUM('active', 'inactive'),
+            defaultValue: 'active'
+        }
+
   }, {
     classMethods: {
       associate: function(models) {
