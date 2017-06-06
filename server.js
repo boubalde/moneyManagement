@@ -1,4 +1,5 @@
 
+
 var express = require("express");
 
 var bodyParser = require("body-parser");
@@ -26,12 +27,32 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/categories_controller");
+var routes1 = require("./controllers/budgets_controller");
+var routes2 = require("./controllers/categories_controller");
+var routes3 = require("./controllers/expenditures_controller");
+var routes4= require("./controllers/users_controller");
 
-app.use("/", routes);
-app.use("/update", routes);
-app.use("/create", routes);
+app.use("/", routes1);
+app.use("/update", routes1);
+app.use("/create", routes1);
+app.use("/delete", routes1);
 //app.use("/users", routes)
+
+app.use("/", routes2);
+app.use("/update", routes2);
+app.use("/create", routes2);
+app.use("/delete", routes2);
+
+app.use("/", routes3);
+app.use("/update", routes3);
+app.use("/create", routes3);
+app.use("/delete", routes3);
+
+app.use("/", routes4);
+app.use("/update", routes4);
+app.use("/create", routes4);
+app.use("/delete", routes4);
+
 
 
 // listen on port 3000
