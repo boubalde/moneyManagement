@@ -3,11 +3,12 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
-      user_id:{
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV1,
+      id:{
+      type: DataTypes.INTEGER(11),
+      //defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     first_name: {
       type: DataTypes.STRING,

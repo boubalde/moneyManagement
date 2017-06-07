@@ -4,11 +4,12 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Categories = sequelize.define("Categories", {
-    cat_id: {
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV1,
+    id: {
+      type: DataTypes.INTEGER(11),
+      //defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     description: {
       type: DataTypes.TEXT,

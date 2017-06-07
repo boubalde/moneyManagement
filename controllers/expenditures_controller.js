@@ -17,7 +17,7 @@ router.get("/expenditures", function(req, res) {
     // TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
     // RANGE SELECTED BY USER
     where: {
-      UserUserId: currentUser,
+      UserId: currentUser,
       date_spent: {
         $between:[body.req.start_date, body.req.end_date]
       }

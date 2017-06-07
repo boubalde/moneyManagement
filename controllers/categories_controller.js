@@ -33,7 +33,7 @@ router.get("/categories/:pageName", function(req, res) {
   // //var currentUser = localStorage.getItem('user_id');
   db.Categories.findAll({
     where: {
-      UserUserId: {
+      UserId: {
         //$or: [null,1]}
         $or: [null,currentUser]}
     },
@@ -44,7 +44,7 @@ router.get("/categories/:pageName", function(req, res) {
   })
   // use promise method to pass the burgers...
   .then(function(dbCategories) {
-    // into the main index, updating the page
+    // into the relevant page
     var hbsObject = {
       category: dbCategories
     };
@@ -69,7 +69,7 @@ router.post("/categories/create", function(req, res) {
   // Post to 
   db.Categories.create({
     description: req.body.description,
-    UserUserId: currentUser
+    UserId: currentUser
   })
   // pass the result of our call
   .then(function(dbCategories) {
