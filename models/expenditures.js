@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     amt_spent: {
       type: DataTypes.INTEGER,
+    },
+    comments: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     classMethods: {
