@@ -1,156 +1,41 @@
 
-      <nav id="green">
-        <!-- Color must go before nav-wrapper or breaks navigation -->
-
-<!-- Dropdown Trigger -->
-  <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
-
-        <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-          <li><a href="#!">one</a></li>
-          <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li>
-          <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-          <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-        </ul>
-        
-        
-        <div class=" nav-wrapper">
-          <a href="#!" class="brand-logo"><span class="logo grey-text text-lighten-2">Douglas Berg - Freelance Design</span></a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#">Services</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li><a href="#">Services</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Work</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </div>
-      </nav >
-
-      <div id="red" class="page-header">
-  <h1>Example page header <small>Subtext for header</small></h1>
-</div>
-
-<button type="button" class="btn btn-default navbar-btn try" id="try">Sign in</button>
-      <!-- Parallax Hero Image with text overlay -->
-      <div class="parallax-container">
-        <!-- <div class="container"> -->
-          <div class="row">
-            <div class="col l8 s12 white-text">
-              <h4 class="thin-text left-align valign">"If you do not know how to take care for money, money will stay away from you." _ Robert T.Kiyosaki</h4>
+   <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header #headfix">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">LANCEL - Money Management</a>
             </div>
-          </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="theme" href="#">Account</a></li>
+                    <li><a class="theme" href="#">Categories</a></li>
+                    <li><a class="theme" href="#">Budgets</a></li>
+                    <li><a class="theme" href="#">Expenditures</a></li>
+                    <li><a class="theme" href="#">Graphs</a></li>
+                    <li><a class="theme" href="#">Help</a></li>
+                </ul>
+            </div>
         </div>
-        <div id="smaller" class="parallax"><img class="sm" src="http://i927.photobucket.com/albums/ad113/yamiejung36/Day%20aa/kkr48.jpg"></div>
-      </div>
-<div class="container">
-	<div class = "row">
-
-		<h1>Money Management Helper Index</h1>
-	</div>
-
-	<div class = "row">
-		<div class = "col-md-12">
-
-			<img class = "img-large" src="assets/img/bank.jpg" alt="image not available">
-		</div>
-	
-	<div>
-	<div class="row">
-	    <form action="/" method="POST">
-		    <div class="row">
-		        <div class="col-md-2">
-					<strong> Select category: </strong><br><br>
-		        </div>
-		        <div class="col-md-2">
-
-
-					<select name="category" style="min-width: 180px" required>
-							
-						{{#each category}}
-							<option value = "{{cat_id}}">{{description}}</option>
-						{{/each}}
-
-					</select>
-				</div>
-				<div class="col-md-2" class="indent1">
-					<strong>Start date:</strong>
-				</div>
-				<div class="col-md-2">
-					<input type="date" name="start_date" required>
-				</div>
-		    </div>
-		    <div class="row">
-		        <div class="col-md-2">
-					<strong> Enter budgeted amount: </strong><br><br>
-		        </div>
-		        <div class="col-md-2">
-		        	<input type="text" name="amt_budgeted" required>
-
-				</div>
-				<div class="col-md-2" class="indent1">
-					<strong>End date:</strong>
-
-				</div>
-				<div class="col-md-2">
-					<input type="date" name="end_date" required>
-				</div>
-		    </div>
-			<div class="row">
-				<div class="col-md-8">
-					<center><button class="button" type="submit">Submit</button></center>
-				</div>
-
-			</div>
-	    </form>
-
+    </nav>
+    <div class="parallax">
+        <p class="quote">"If you do not know how to take care for money,
+            <br /> money will stay away from you."
+            <br />_ Robert T.Kiyosaki</p>
     </div>
-</div>
-
-
-
-
-
-      <!-- Footer -->
-      <footer class="page-footer blue-grey darken-3">
-        <div class="container">
-          <div class="row">
-            <div class="col l6 s12">
-              <h5 class="white-text">Cheyenne Web Developer</h5>
-              <ul>
-                <li class="grey-text text-lighten-4">PSD to HTML</li>
-                <li class="grey-text text-lighten-4">Updates and Upgrades</li>
-                <li class="grey-text text-lighten-4">UX/UI Design</li>
-                <li class="grey-text text-lighten-4">Site Maintenance</li>
-                <li class="grey-text text-lighten-4">Hosting</li>
-              </ul>
+    <!-- /.container-fluid -->
+    <!-- cards -->
+    <nav class="navbar navbar-default">
+        <nav class="copyright">
+            <div class="container">
+                &copy; 2017 Copyright, All Rights Reserved
+                <a class="" href="#!">Privacy Policy</a>
             </div>
-            <div class="col l3 espace offset-l2 s12">
-              <h5 class="white-text">Links</h5>
-              <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Services</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Work</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="footer-copyright blue-grey darken-4">
-          <div class="container">
-          &copy; 2016 Copyright, All Rights Reserved
-          <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
-          </div>
-        </div>
-
-      </footer>
-
+        </nav>
+    </nav>
