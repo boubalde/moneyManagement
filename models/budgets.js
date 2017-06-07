@@ -4,11 +4,12 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Budgets = sequelize.define("Budgets", {
-    budget_id: {
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV1,
+    id: {
+      type: DataTypes.INTEGER(11),
+      //defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     start_date: {
       type: DataTypes.DATE,

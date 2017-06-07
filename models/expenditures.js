@@ -5,10 +5,11 @@
 module.exports = function(sequelize, DataTypes) {
   var Expenditures = sequelize.define("Expenditures", {
     id: {
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV1,
+      type: DataTypes.INTEGER(11),
+      //defaultValue:DataTypes.UUIDV1,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true
     },
     date_spent: {
       type: DataTypes.DATE,
