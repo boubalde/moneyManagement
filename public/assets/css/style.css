@@ -1,46 +1,103 @@
+
 .indent1{
-	padding-left: 50px;
+	margin-left: 50px;
+
 }
+
 li {
   padding: 5px;
   margin: 5px;
   background: #faebd7;
 }
 
-.label {
-  font-weight: bold;
+
+.bo{
+  background: #64ffda;
+}
+#green{
+  background: green;
 }
 
-.create-update-form {
-  padding: 5px;
-  margin: 5px;
-/*  background: aqua;
-*/}
+/*.try{
+  background:pink;
+}*/
 
-
-.form-group {
-  margin-bottom: 5px;
+body {
+  /*min-height: 100vh;*/
+  background:#F0E68C;
+}
+.plese{
+  background:green;
 }
 
-img{
-	display: block;
-	margin: auto;
-	width: 20%;
+.page-footer{
+  background:#546e7a;
+}
+.grey-text{
+  color: :white;
+}
+.main-card {
+  height: 80px;
+}
+
+.card { width:100%;
+  overflow: auto;
+}
+.card-image {
+  height: 20px;
 }
 h1{
-	text-align: center;
+  text-align: center;
+}
+h2{
+  margin-top: 10px;
+  text-align: center;
+}
+h4{
+  text-align: center;
+}
+.parallax-container{
+  height:5%;
 }
 
-h4{
-	text-align: center
+.parallax-container img { 
+  height: 100px;
+  width: 100%;
+   }
+
+
+.parallax-container {
+  height: 30px;
 }
+
 .img-large{
   display: block;
   margin: auto;
-  width: 40%;
-  padding-bottom: 20px;
+  width: 50%;
+  padding-bottom: 10px;
 }
 
 .button{
   margin-top: 20px;
 }
+.spending-list{
+  padding-top: 20px;
+
+}
+
+
+#navbar{
+  height: 100px;
+}
+
+.div.card-action{
+  height: 53px;
+  width: 300px;
+}
+#smaller{
+  max-height: 50%;
+}
+.picture{
+  height: 100px;
+}
+

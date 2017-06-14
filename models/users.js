@@ -1,3 +1,4 @@
+
 module.exports = function(sequelize, Sequelize) {
 var Users = sequelize.define("Users", {
 
@@ -42,6 +43,7 @@ var Users = sequelize.define("Users", {
             type: Sequelize.ENUM('active', 'inactive'),
             defaultValue: 'active'
         }
+
 
   }, {
     classMethods: {

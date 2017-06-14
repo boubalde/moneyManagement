@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     var express = require("express");
     var methodOverride = require("method-override");
     var app        = express()
@@ -12,10 +13,10 @@
 
 // bring in the models
 var db = require("./models");
+var path =require("path");
+
 
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(__dirname + "/public"));
-
  //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,6 +29,9 @@ app.use(bodyParser.json());
  app.use(passport.initialize());
  app.use(passport.session()); // persistent login sessions
 
+
+app.use(express.static(process.cwd()+"/public"));
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.use(bodyParser.urlencoded({
   extended: false

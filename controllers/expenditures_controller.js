@@ -14,14 +14,14 @@ var currentUser = "";
 router.get("/expenditures", function(req, res) {
  
   db.Expenditures.findAll({
-    //TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
-    //RANGE SELECTED BY USER
-    // where: {
-    //   UserUserId: currentUser,
-    //   date_spent: {
-    //     $between:[body.req.start_date, body.req.end_date]
-    //   }
-    // },
+    // TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
+    // RANGE SELECTED BY USER
+    where: {
+      UserId: currentUser,
+      date_spent: {
+        $between:[body.req.start_date, body.req.end_date]
+      }
+    },
   })
   // use promise method to pass the Expenditures...
   .then(function(dbExpenditures) {
@@ -70,6 +70,10 @@ router.post("/expenditures/create", function(req, res) {
       res.json(dbExpenditures);
     });
   });
+
+//TODO:  WRITE UDATE ROUTE WITH PUT METHOD TO ALLOW USER
+//TO OVERWRITE AN EXPENDITURE (E.G., TO CORRECT ERROR)
+//THE EXPENDITURES PAGE SHOULD ALLOW FOR THIS
 
 //TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
 //MUST BE REMOVED LATER
