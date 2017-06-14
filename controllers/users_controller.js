@@ -5,12 +5,23 @@ var router = express.Router();
 // grabbing our models
 var db = require("../models");
 
+//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
+//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
+var currentUser = "";
+
 
 // get route -> index
-router.get("/", function(req, res) {
-  // send us to the next get function instead.
-  res.redirect("/");   
-});
+
+// router.get("/", function(req, res) {
+//   // send us to the next get function instead.
+//   res.redirect("/");   
+// });
+
+// router.get("/", function(req, res) {
+//   // send us to the next get function instead.
+//   res.redirect("/home");   
+// });
+
 
 // get route, edited to match sequelize
 router.get("/users", function(req, res) {
@@ -36,11 +47,10 @@ router.post("/users/create", function(req, res) {
 
   // edited burger create to add in a burger_name
   db.Users.create({
-    first_name:req.body.first_name
-    last_name: req.body.last_name
-    email_address: req.body.email_address
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email_address: req.body.email_address,
     password: req.body.password
-    classMethod: req.body.classMethod
   })
   // pass the result of our call
   .then(function(dbUsers) {

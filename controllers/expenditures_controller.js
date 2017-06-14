@@ -1,23 +1,36 @@
 var express = require("express");
-// var bodyParser = require("body-parser");
+
 var router = express.Router();
+
 // grabbing our models
 var db = require("../models");
 
+//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
+//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
+var currentUser = "";
 
 
 // get route, edited to match sequelize
 router.get("/expenditures", function(req, res) {
  
-  db.Expenditures.findAll({})
+  db.Expenditures.findAll({
+    //TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
+    //RANGE SELECTED BY USER
+    // where: {
+    //   UserUserId: currentUser,
+    //   date_spent: {
+    //     $between:[body.req.start_date, body.req.end_date]
+    //   }
+    // },
+  })
   // use promise method to pass the Expenditures...
   .then(function(dbExpenditures) {
     var hbsObject = {
-      Expenditures: dbExpenditures
+      expenditures: dbExpenditures
     };
     console.log(dbExpenditures);
     console.log("list of all the Expenditures");
-    return res.render("index", hbsObject);
+    return res.render("expenditures", hbsObject);
     
   });
 });
@@ -27,18 +40,21 @@ router.get("/expenditures", function(req, res) {
 router.post("/expenditures/create", function(req, res) {
   console.log(req.body)
 
-  // edited burger create to add in a burger_name
   db.Expenditures.create({
-    date_: req.body.date_
+    date_spent: req.body.date_spent,
     amt_spent:req.body.amt_spent
-    classMethods:req.body.classMethods
+    //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
+    //classMethods:req.body.classMethods
   })
   // pass the result of our call
   .then(function(dbExpenditures) {
     // log the result to our terminal/bash window
     console.log(dbExpenditures);
+    //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
+    //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
+    //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
     // redirect
-    res.redirect("/");
+    //res.redirect("/");
   });
 });
 
@@ -54,6 +70,25 @@ router.post("/expenditures/create", function(req, res) {
       res.json(dbExpenditures);
     });
   });
+
+//TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
+//MUST BE REMOVED LATER
+
+function storeUserId(){
+
+  if (typeof localStorage === "undefined" || localStorage === null) {
+    
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+   
+  localStorage.setItem('user_id', 1);
+  console.log('current user id ' + localStorage.getItem('user_id'));
+
+  currentUser = localStorage.getItem('user_id');
+
+};
+
 
 module.exports = router;
 

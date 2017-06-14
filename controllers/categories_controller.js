@@ -6,6 +6,12 @@ var router = express.Router();
 
 var db = require("../models");
 
+//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
+//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
+var currentUser = "";
+
+
+
 // get route -> index
 router.get("/", function(req, res) {
   // send us to the next get function instead.
@@ -14,8 +20,19 @@ router.get("/", function(req, res) {
 
 // get route, edited to match sequelize
 router.get("/categories", function(req, res) {
-  // replace old function with sequelize function
+
+  // TODO: Call function inserted temporarily to set a value for user id of
+  // current user.  This function will be removed after the login
+  // code has been adjusted to store the actual value for user.
+  storeUserId();
+    
+  //var currentUser = localStorage.getItem('user_id');
   db.Categories.findAll({
+    where: {
+      UserId: {
+        //$or: [null,1]}
+        $or: [null,currentUser]}
+    },
     // Here we specify we want to return our categories in ascending order by description field
     order: [
       ["description", "ASC"]
@@ -27,120 +44,51 @@ router.get("/categories", function(req, res) {
     var hbsObject = {
       category: dbCategories
     };
-    return res.render("index", hbsObject);
+    return res.render("expenditures", hbsObject);
   });
 });
 
-// // post route to create burgers
-// router.post("/burgers/create", function(req, res) {
-//   // edited burger create to add in a burger_name
-//   db.Burger.create({
-//     burger_name: req.body.burger_name
-//   })
-//   // pass the result of our call
-//   .then(function(dbBurger) {
-//     // log the result to our terminal/bash window
-//     console.log(dbBurger);
-//     // redirect
-//     res.redirect("/");
-//   });
-// });
+router.post("/categories/create", function(req, res) {
+  console.log(req.body);
 
-// // put route to devour a burger
-// router.put("/burgers/update", function(req, res) {
-//   // If we are given a customer, create the customer and give them this devoured burger
-//   if (req.body.customer) {
-//     db.Customer.create({
-//       customer: req.body.customer,
-//       BurgerId: req.body.burger_id
-//     })
-//     .then(function(dbCustomer) {
-//       return db.Burger.update({
-//         devoured: true
-//       }, {
-//         where: {
-//           id: req.body.burger_id
-//         }
-//       });
-//     })
-//     .then(function(dbBurger) {
-//       res.redirect("/");
-//     });
-//   }
-//   // If we aren't given a customer, just update the burger to be devoured
-//   else {
-//     db.Burger.update({
-//       devoured: true
-//     }, {
-//       where: {
-//         id: req.body.burger_id
-//       }
-//     })
-//     .then(function(dbBurger) {
-//       res.redirect("/");
-//     });
-//   }
-// });
+  // TODO - LINE BELOW CALLS A TESTING FUNCTION AND IT MUST BE REMOVED LATER
+  storeUserId();
+
+  // Post to 
+  db.Categories.create({
+    description: req.body.description,
+    UserUserId: currentUser
+  })
+  // pass the result of our call
+  .then(function(dbCategories) {
+    // log the result to our terminal/bash window
+    console.log(dbCategories);
+    
+    //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
+    //LET USER USE MENU TO GO BACK TO HOME IN CASE
+    //USER WANTS TO STAY ON PAGE AND CREATE MORE CATEGORIES
+    // redirect
+    //res.redirect("/");
+  });
+});
+
+//TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
+//MUST BE REMOVED LATER
+
+function storeUserId(){
+
+  if (typeof localStorage === "undefined" || localStorage === null) {
+    
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+   
+  localStorage.setItem('user_id', 1);
+  console.log('current user id ' + localStorage.getItem('user_id'));
+
+  currentUser = localStorage.getItem('user_id');
+
+};
+
 
 module.exports = router;
-//COMMENT OUT BELOW
-
-// module.exports = function(app) {
-
-//   //Find all the Categories
-//   app.get("/api/categories", function(req, res) {
-//     db.Categories.findAll({
-//     }).then(function(dbCategories) {
-//       res.json(dbCategories);
-//     });
-//   });
-
-
-// //Get route for retrieving a single Category
-//   app.get("/api/categories/:id", function(req, res) {
-//     // Here we add an "include" property to our options in our findOne query
-//     // We set the value to an array of the models we want to include in a left outer join
-//     // In this case, the budgets, and the expenditures
-//     db.Categories.findOne({
-//       where: {
-//         id: req.params.id
-//       },
-//           include: [db.Budgets]
-//               include: [db.Expenditures]
-//     }).then(function(dbCategories) {
-//       res.json(dbCategories);
-//     });
-//   });
-
-// // create a new Category
-//   app.post("/api/categories", function(req, res) {
-//     db.Categories.create(req.body).then(function(dbCategories) {
-//       res.json(dbCategories);
-//     });
-//   });
-
-//   // delete a Category
-//   app.delete("/api/Categories/:id", function(req, res) {
-//     db.Categories.destroy({
-//       where: {
-//         id: req.params.id
-//       }
-//     }).then(function(dbCategories) {
-//       res.json(dbCategories);
-//     });
-//   });
-
-//   // update a Category
-//   app.put("/api/categories", function(req, res) {
-//     db.Post.update(
-//       req.body,
-//       {
-//         where: {
-//           id: req.body.id
-//         }
-//       }).then(function(dbCategories) {
-//         res.json(dbCategories);
-//       });
-//   });
-
-// };

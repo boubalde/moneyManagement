@@ -4,7 +4,16 @@ var router = express.Router();
 // grabbing our models
 var db = require("../models");
 
+//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
+//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
+var currentUser = "";
 
+
+// get route -> index
+router.get("/", function(req, res) {
+  // send us to the next get function instead.
+  res.redirect("/budgets");
+});
 
 // get route, edited to match sequelize
 router.get("/budgets", function(req, res) {
@@ -27,11 +36,11 @@ router.get("/budgets", function(req, res) {
 router.post("/budgets/create", function(req, res) {
   console.log(req.body)
 
-  // edited burger create to add in a burger_name
+  
   db.Budgets.create({
-    start_date:req.body.start_date;
-    end_date:req.body.end_date;
-    amt_budgeted:req.body.amt_budgeted;
+    start_date: req.body.start_date,
+    end_date: req.body.end_date,
+    amt_budgeted: req.body.amt_budgeted
   })
   // pass the result of our call
   .then(function(dbBudgets) {

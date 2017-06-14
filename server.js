@@ -1,6 +1,6 @@
-	var express = require("express");
-	var methodOverride = require("method-override");
-	var app        = express()
+    var express = require("express");
+    var methodOverride = require("method-override");
+    var app        = express()
     var passport   = require('passport')
     var session    = require('express-session')
     var bodyParser = require('body-parser')
@@ -9,10 +9,10 @@
     var path       = require("path")
     var PORT = process.env.PORT || 8080;
 
+
 // bring in the models
 var db = require("./models");
 
-var app = express();
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(__dirname + "/public"));
 
@@ -41,6 +41,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
+
 // app.get('/', function(req, res){
 //       res.render('/');
 //     });
@@ -59,13 +60,36 @@ app.get('/logout', function(req, res){
 
 var routes = require("./controllers/categories_controller");
 
-app.use("/", routes);
-app.use("/update", routes);
-app.use("/create", routes);
+var routes1 = require("./controllers/budgets_controller");
+var routes2 = require("./controllers/categories_controller");
+var routes3 = require("./controllers/expenditures_controller");
+var routes4= require("./controllers/users_controller");
+
+
+app.use("/", routes1);
+app.use("/update", routes1);
+app.use("/create", routes1);
+app.use("/delete", routes1);
 //app.use("/users", routes)
 
+app.use("/", routes2);
+app.use("/update", routes2);
+app.use("/create", routes2);
+app.use("/delete", routes2);
 
-// listen on port 3000
+app.use("/", routes3);
+app.use("/update", routes3);
+app.use("/create", routes3);
+app.use("/delete", routes3);
+
+app.use("/", routes4);
+app.use("/update", routes4);
+app.use("/create", routes4);
+app.use("/delete", routes4);
+
+
+
+
 db.sequelize.sync().then(function(){
     console.log('Nice! Database looking good!')
 

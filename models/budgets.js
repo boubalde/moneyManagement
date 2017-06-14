@@ -1,7 +1,3 @@
-// Budgets models
-
-
-
 module.exports = function(sequelize, DataTypes) {
   var Budgets = sequelize.define("Budgets", {
     budget_id: {
@@ -10,9 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       allowNull: false
     },
-    budget_name: {
-    type:DataTypes.STRING,
-     },
     start_date: {
       type: DataTypes.DATE,
     },
@@ -32,6 +25,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  // console.log(Budgets);
   return Budgets;
 };

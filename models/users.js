@@ -1,6 +1,3 @@
-// Users models
-
-
 module.exports = function(sequelize, Sequelize) {
 var Users = sequelize.define("Users", {
 
