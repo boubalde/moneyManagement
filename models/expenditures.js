@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     date_spent: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
     },
     amt_spent: {
       type: DataTypes.INTEGER,

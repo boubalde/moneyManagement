@@ -8,29 +8,41 @@ var db = require("../models");
 //TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
 //KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
 var currentUser = "";
+var intBudgetId = ""
 
+//TODO: CALLS FUNCTION USED FOR DEVELOPMENT.  
+storeUserId();
+
+router.get("/expenditures/view/setup", function(req, res){
+  //call up the view page without rendering any hbs object
+  // because we don't have a request body yet.
+  res.render("expendituresView","");
+});
 
 // get route, edited to match sequelize
-router.get("/expenditures", function(req, res) {
- 
+router.get("/expenditures/view/list", function(req, res) {
+  console.log("start_date: " + req.query.start_date);
+  console.log("end_date: " + req.query.end_date);
+
   db.Expenditures.findAll({
     // TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
     // RANGE SELECTED BY USER
     where: {
       UserId: currentUser,
       date_spent: {
-        $between:[body.req.start_date, body.req.end_date]
+        $between:[req.query.start_date, req.query.end_date]
       }
     },
+  include: [{model: db.Categories}]
   })
   // use promise method to pass the Expenditures...
   .then(function(dbExpenditures) {
     var hbsObject = {
-      expenditures: dbExpenditures
+      Expenditures: dbExpenditures
     };
     console.log(dbExpenditures);
     console.log("list of all the Expenditures");
-    return res.render("expenditures", hbsObject);
+    return res.render("expendituresView", hbsObject);
     
   });
 });
@@ -38,36 +50,120 @@ router.get("/expenditures", function(req, res) {
 
 // post route to create expenditure
 router.post("/expenditures/create", function(req, res) {
+  
   console.log(req.body)
 
-  db.Expenditures.create({
-    date_spent: req.body.date_spent,
-    amt_spent:req.body.amt_spent
+  // Begin by finding a BudgetId in budgets table.
+  // This is a match on category, user and time period.
+  db.Budgets.findOne({
+    where: {
+      UserId: currentUser,
+      CategoryId: req.body.category_id,
+      end_date: {$gte: req.body.date_spent}
+    },
     //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
     //classMethods:req.body.classMethods
   })
   // pass the result of our call
-  .then(function(dbExpenditures) {
+  .then(function(dbBudgets) {
     // log the result to our terminal/bash window
-    console.log(dbExpenditures);
+    intBudgetId  = dbBudgets.id;
+    console.log("BudgetId: " + intBudgetId);
     //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
     //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
     //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
     // redirect
     //res.redirect("/");
+  // The expenditure creation has been chained here to ensure that 
+  // it will execute only after the integer variable intBudgetId has
+  // been assigned a value.  This value is required in the expenditures
+  // table (so that later the sum of expenditures in each category can
+  // be compared to budget).
+  })
+  .then(function(dbChain){
+
+      db.Expenditures.create({
+
+        UserId: currentUser,
+        date_spent: req.body.date_spent,
+        amt_spent: req.body.amt_spent,
+        CategoryId: req.body.category_id,
+        BudgetId: intBudgetId
+        //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
+        //classMethods:req.body.classMethods
+      })
+      //pass the result of our call
+      .then(function(dbExpenditures) {
+        // log the result to our terminal/bash window
+        console.log(dbExpenditures);
+      //   //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
+      //   //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
+      //   //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
+      //   // redirect
+      //   //res.redirect("/");
+      });
+    });
+    
   });
-});
+
+//   db.Expenditures.create({
+
+//     UserId: currentUser,
+//     date_spent: req.body.date_spent,
+//     amt_spent: req.body.amt_spent,
+//     CategoryId: req.body.category_id,
+//     BudgetId: intBudgetId
+//     //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
+//     //classMethods:req.body.classMethods
+//   })
+//   // pass the result of our call
+//   .then(function(dbExpenditures) {
+//     // log the result to our terminal/bash window
+//     console.log(dbExpenditures);
+//     //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
+//     //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
+//     //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
+//     // redirect
+//     //res.redirect("/");
+//   });
+// });
 
 
- // DELETE
-  router.delete("/expenditures/delete/:id", function(req, res) {
-    db.Expenditures.destroy({
+  router.put("/budgets/update/", function(req, res) {
+    db.Budgets.update({
+      amt_budgeted: req.body.amt_budgeted
+    },{
       where: {
-        id: req.params.id
+        id: req.body.budget_id
+      }
+    })
+    .then(function(dbBudgets) {
+      //res.json(dbBudgets);
+    });
+  });
+
+  // UPDATE 
+  router.put("/expenditures/update", function(req, res) {
+    db.Expenditures.update({
+      amt_spent: req.body.amt_spent
+    },{
+      where: {
+        id: req.body.expenditure_id
       }
     })
     .then(function(dbExpenditures) {
-      res.json(dbExpenditures);
+      //res.json(dbExpenditures);
+    });
+    
+  });// DELETE
+  router.delete("/expenditures/delete", function(req, res) {
+    db.Expenditures.destroy({
+      where: {
+        id: req.body.expenditure_id
+      }
+    })
+    .then(function(dbExpenditures) {
+      //res.json(dbExpenditures);
     });
   });
 
@@ -92,6 +188,7 @@ function storeUserId(){
   currentUser = localStorage.getItem('user_id');
 
 };
+
 
 
 module.exports = router;

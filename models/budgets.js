@@ -12,10 +12,10 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true
     },
     start_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
     },
     end_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
     },
     amt_budgeted: {
       type: DataTypes.INTEGER,
