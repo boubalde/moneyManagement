@@ -17,10 +17,10 @@ var currentUser = "";
 storeUserId();
 
 // get route -> index
-router.get("/", function(req, res) {
-  // send us to the next get function instead.
-  res.redirect("/budgets");
-});
+///router.get("/", function(req, res) {
+//   // send us to the next get function instead.
+//   res.redirect("/budgets");
+// });
 
 router.get("/budgets/view/setup", function(req, res){
   //call up the view page without rendering any hbs object
@@ -35,42 +35,36 @@ router.get("/budgets/view/list", function(req, res) {
   console.log('end_date: ' + req.query.end_date);
   db.Budgets.findAll({
     // use promise method to pass the Budgets...
-      // where: {
-      //   UserId: currentUser,
-      //   start_date: req.query.start_date,
-      //   end_date: req.query.end_date
-      // },
        where: {
         UserId: currentUser,
         start_date: req.query.start_date,
         end_date: req.query.end_date
-      },       //start_date: localStorage.getItem('start_date'),
-        //end_date: localStorage.getItem('end_date')},
-      // include: [{
-      //     model: Categories,
-      //     where: { Categories: Sequelize.col('CategoryId') }
-      // }]
-      //include: [{model: db.Categories, attributes: ['description']}]
-      include: [{model: db.Categories}]
+      },
+      include: [{model: db.Categories, attributes: ['description']}]
+
 
     })
     .then(function(dbBudgets) {
-      var hbsObject = {
-        Budgets: dbBudgets
-      };
-      // console.log("id: " + dbBudgets.id);
-      // console.log("description: " + dbBudgets.description);
-      // console.log("start_date: " + dbBudgets.start_date);
-      // console.log("end_date: " + dbBudgets.end_date);
-      // console.log("amt_budgeted: " + dbBudgets.amt_budgeted);
-      // console.log("CategoryId: " + dbBudgets.CategoryId);
-      // console.log("CreatedAt: ") + dbBudgets.createdAt;
-      // console.log("list of all the Budgets");
-      console.log("description: " + dbBudgets.description);
-      console.log(dbBudgets);
+      var hbsObject = [];
 
 
-      return res.render("budgetsView", hbsObject);
+      for (var i = dbBudgets.length - 1; i >= 0; i--) {
+        let obj = {
+          id: dbBudgets[i].id,
+          description:dbBudgets[i].Category.dataValues.description,
+          amt_budgeted: dbBudgets[i].amt_budgeted
+        }
+
+      hbsObject.push(obj);
+      //console.log(obj);
+      }
+
+      var budgetData = {Budgets: hbsObject};
+
+
+      console.log(hbsObject);
+
+      return res.render("budgetsView", budgetData);
       
   });
 });
@@ -101,7 +95,7 @@ router.post("/budgets/create", function(req, res) {
 
 
  // UPDATE 
-  router.put("/budgets/update/", function(req, res) {
+  router.put("/budgets/update", function(req, res) {
     db.Budgets.update({
       amt_budgeted: req.body.amt_budgeted
     },{
@@ -115,7 +109,7 @@ router.post("/budgets/create", function(req, res) {
   });
 
  // DELETE 
-  router.delete("/budgets/delete/:id", function(req, res) {
+  router.delete("/budgets/delete", function(req, res) {
     db.Budgets.destroy({
       where: {
         id: req.body.id
@@ -128,50 +122,50 @@ router.post("/budgets/create", function(req, res) {
 
 
 // get route, edited to match sequelize
-router.get("/budgets/view/test", function(req, res) {
+// router.get("/budgets/view/test", function(req, res) {
 
-  console.log('start_date: ' + req.query.start_date);
-  console.log('end_date: ' + req.query.end_date);
-  db.Categories.findAll({
-    // use promise method to pass the Budgets...
-      // where: {
-      //   UserId: currentUser,
-      //   start_date: req.query.start_date,
-      //   end_date: req.query.end_date
-      // },
-      //  where: {
-      //   UserId: currentUser,
-      //   start_date: req.query.start_date,
-      //   end_date: req.query.end_date
-      // },       //start_date: localStorage.getItem('start_date'),
-        //end_date: localStorage.getItem('end_date')},
-      // include: [{
-      //     model: Categories,
-      //     where: { Categories: Sequelize.col('CategoryId') }
-      // }]
-      include: [{model: db.Budgets, attributes: ['start_date']}]
+//   console.log('start_date: ' + req.query.start_date);
+//   console.log('end_date: ' + req.query.end_date);
+//   db.Categories.findAll({
+//     // use promise method to pass the Budgets...
+//       // where: {
+//       //   UserId: currentUser,
+//       //   start_date: req.query.start_date,
+//       //   end_date: req.query.end_date
+//       // },
+//       //  where: {
+//       //   UserId: currentUser,
+//       //   start_date: req.query.start_date,
+//       //   end_date: req.query.end_date
+//       // },       //start_date: localStorage.getItem('start_date'),
+//         //end_date: localStorage.getItem('end_date')},
+//       // include: [{
+//       //     model: Categories,
+//       //     where: { Categories: Sequelize.col('CategoryId') }
+//       // }]
+//       include: [{model: db.Budgets, attributes: ['start_date']}]
 
-    })
-    .then(function(dbCategories) {
-      var hbsObject = {
-        Categories: dbCategories
-      };
-      // console.log("id: " + dbBudgets.id);
-      // console.log("description: " + dbBudgets.description);
-      // console.log("start_date: " + dbBudgets.start_date);
-      // console.log("end_date: " + dbBudgets.end_date);
-      // console.log("amt_budgeted: " + dbBudgets.amt_budgeted);
-      // console.log("CategoryId: " + dbBudgets.CategoryId);
-      // console.log("CreatedAt: ") + dbBudgets.createdAt;
-      // console.log("list of all the Budgets");
-      console.log("start_date: " + dbCategories.start_date);
-      //console.log(dbCategories);
+//     })
+//     .then(function(dbCategories) {
+//       var hbsObject = {
+//         Categories: dbCategories
+//       };
+//       // console.log("id: " + dbBudgets.id);
+//       // console.log("description: " + dbBudgets.description);
+//       // console.log("start_date: " + dbBudgets.start_date);
+//       // console.log("end_date: " + dbBudgets.end_date);
+//       // console.log("amt_budgeted: " + dbBudgets.amt_budgeted);
+//       // console.log("CategoryId: " + dbBudgets.CategoryId);
+//       // console.log("CreatedAt: ") + dbBudgets.createdAt;
+//       // console.log("list of all the Budgets");
+//       console.log("start_date: " + dbCategories.start_date);
+//       //console.log(dbCategories);
 
 
-      //return res.render("budgetsView", hbsObject);
+//       //return res.render("budgetsView", hbsObject);
       
-  });
-});
+//   });
+// });
 
 //TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
 //MUST BE REMOVED LATER

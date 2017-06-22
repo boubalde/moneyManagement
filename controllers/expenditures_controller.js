@@ -1,5 +1,7 @@
 var express = require("express");
 
+var moment = require("moment");
+
 var router = express.Router();
 
 // grabbing our models
@@ -21,31 +23,48 @@ router.get("/expenditures/view/setup", function(req, res){
 
 // get route, edited to match sequelize
 router.get("/expenditures/view/list", function(req, res) {
-  console.log("start_date: " + req.query.start_date);
-  console.log("end_date: " + req.query.end_date);
 
+  console.log('start_date: ' + req.query.start_date);
+  console.log('end_date: ' + req.query.end_date);
   db.Expenditures.findAll({
-    // TODO:  WRITE QUERY TO OBTAIN EXPENDITURES FOR USER ID AND IN DATE
-    // RANGE SELECTED BY USER
-    where: {
-      UserId: currentUser,
-      date_spent: {
-        $between:[req.query.start_date, req.query.end_date]
+    // use promise method to pass the Budgets...
+       where: {
+        UserId: currentUser,
+        date_spent: {
+          $between:[req.query.start_date, req.query.end_date]
+        }
+      },
+      include: [{model: db.Categories, attributes: ['description']}]
+
+
+    })
+    .then(function(dbExpenditures) {
+      var hbsObject = [];
+
+
+      for (var i = dbExpenditures.length - 1; i >= 0; i--) {
+        let obj = {
+          id: dbExpenditures[i].id,
+          description:dbExpenditures[i].Category.dataValues.description,
+          date_spent: dbExpenditures[i].date_spent,
+          comments: dbExpenditures[i].comments,
+          amt_spent: dbExpenditures[i].amt_spent
+        }
+
+      hbsObject.push(obj);
+      console.log(obj);
       }
-    },
-  include: [{model: db.Categories}]
-  })
-  // use promise method to pass the Expenditures...
-  .then(function(dbExpenditures) {
-    var hbsObject = {
-      Expenditures: dbExpenditures
-    };
-    console.log(dbExpenditures);
-    console.log("list of all the Expenditures");
-    return res.render("expendituresView", hbsObject);
-    
+
+      var expenditureData = {Expenditures: hbsObject};
+
+
+      console.log(hbsObject);
+
+      return res.render("expendituresView", expenditureData);
+      
   });
 });
+
 
 
 // post route to create expenditure
@@ -87,6 +106,7 @@ router.post("/expenditures/create", function(req, res) {
         UserId: currentUser,
         date_spent: req.body.date_spent,
         amt_spent: req.body.amt_spent,
+        comments: req.body.comments,
         CategoryId: req.body.category_id,
         BudgetId: intBudgetId
         //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
@@ -129,23 +149,13 @@ router.post("/expenditures/create", function(req, res) {
 // });
 
 
-  router.put("/budgets/update/", function(req, res) {
-    db.Budgets.update({
-      amt_budgeted: req.body.amt_budgeted
-    },{
-      where: {
-        id: req.body.budget_id
-      }
-    })
-    .then(function(dbBudgets) {
-      //res.json(dbBudgets);
-    });
-  });
-
   // UPDATE 
   router.put("/expenditures/update", function(req, res) {
     db.Expenditures.update({
-      amt_spent: req.body.amt_spent
+      amt_spent: req.body.amt_spent,
+      comments: req.body.comments,
+      date_spent: req.body.date_spent
+
     },{
       where: {
         id: req.body.expenditure_id
@@ -167,9 +177,6 @@ router.post("/expenditures/create", function(req, res) {
     });
   });
 
-//TODO:  WRITE UDATE ROUTE WITH PUT METHOD TO ALLOW USER
-//TO OVERWRITE AN EXPENDITURE (E.G., TO CORRECT ERROR)
-//THE EXPENDITURES PAGE SHOULD ALLOW FOR THIS
 
 //TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
 //MUST BE REMOVED LATER
