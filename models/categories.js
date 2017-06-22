@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Categories.hasMany(models.Budgets);
+        Categories.hasMany(models.Expenditures);
         Categories.belongsTo(models.Users);
       }
     }

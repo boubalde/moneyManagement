@@ -1,6 +1,6 @@
 // Expenditures models
 
-
+var moment = require("moment");
 
 module.exports = function(sequelize, DataTypes) {
   var Expenditures = sequelize.define("Expenditures", {
@@ -11,8 +11,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true
     },
+    // date_spent: {
+    //   type: DataTypes.DATEONLY,
+    // },
     date_spent: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
+      get: function() {
+        return moment.utc(this.getDataValue('date_spent')).format('YYYY-MM-DD');
+      }
     },
     amt_spent: {
       type: DataTypes.INTEGER,
