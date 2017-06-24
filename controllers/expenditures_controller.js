@@ -78,6 +78,7 @@ router.post("/expenditures/create", function(req, res) {
     where: {
       UserId: currentUser,
       CategoryId: req.body.category_id,
+      start_date: {$lte: req.body.date_spent},
       end_date: {$gte: req.body.date_spent}
     },
     //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
