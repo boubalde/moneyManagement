@@ -62,12 +62,13 @@ var authRoute = require('./routes/passP.js')(app,passport);
 var strategies = require('./config/passport.js')(passport,db.Users);
 
 
-var routes = require("./controllers/categories_controller");
+//var routes = require("./controllers/categories_controller");
 
 var routes1 = require("./controllers/budgets_controller");
 var routes2 = require("./controllers/categories_controller");
 var routes3 = require("./controllers/expenditures_controller");
-var routes4= require("./controllers/users_controller");
+var routes4 = require("./controllers/users_controller");
+var routes5 = require("./controllers/graphs_controller");
 
 
 app.use("/", routes1);
@@ -91,6 +92,10 @@ app.use("/update", routes4);
 app.use("/create", routes4);
 app.use("/delete", routes4);
 
+app.use("/", routes5);
+app.use("/update", routes5);
+app.use("/create", routes5);
+app.use("/delete", routes5);
 
 
 

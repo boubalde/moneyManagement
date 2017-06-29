@@ -14,7 +14,8 @@ app.get('/logout', authController.logout);
 
 
 app.post('/signup', passport.authenticate('local-signup',{ 
-    successRedirect: '/categories',
+    //successRedirect: '/categories',
+    successRedirect: '/',
     failureRedirect: '/signup'
 }));
 
@@ -34,7 +35,8 @@ app.get('/logout',authController.logout);
 
 
 app.post('/signin', passport.authenticate('local-signin',{ 
-    successRedirect: '/categories',
+    //successRedirect: '/categories',
+    successRedirect: '/',
     failureRedirect: '/signin'
 }));
 

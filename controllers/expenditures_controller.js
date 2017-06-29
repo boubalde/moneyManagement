@@ -29,7 +29,8 @@ router.get("/expenditures/view/list", function(req, res) {
   db.Expenditures.findAll({
     // use promise method to pass the Budgets...
        where: {
-        UserId: currentUser,
+        //UserId: currentUser,
+        UserId: localStorage.getItem('user_id'),
         date_spent: {
           $between:[req.query.start_date, req.query.end_date]
         }
@@ -76,7 +77,8 @@ router.post("/expenditures/create", function(req, res) {
   // This is a match on category, user and time period.
   db.Budgets.findOne({
     where: {
-      UserId: currentUser,
+      //UserId: currentUser,
+      UserId: localStorage.getItem('user_id'),
       CategoryId: req.body.category_id,
       start_date: {$lte: req.body.date_spent},
       end_date: {$gte: req.body.date_spent}
@@ -104,7 +106,8 @@ router.post("/expenditures/create", function(req, res) {
 
       db.Expenditures.create({
 
-        UserId: currentUser,
+        //UserId: currentUser,
+        UserId: localStorage.getItem('user_id'),
         date_spent: req.body.date_spent,
         amt_spent: req.body.amt_spent,
         comments: req.body.comments,
