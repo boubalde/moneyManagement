@@ -11,7 +11,7 @@ var db = require("../models");
 var currentUser = "";
 
 //TODO: CALLS FUNCTION USED FOR DEVELOPMENT.  
-storeUserId();
+//storeUserId();
 
 // get route -> index
 router.get("/", function(req, res) {
@@ -22,6 +22,7 @@ router.get("/", function(req, res) {
 // get route, edited to match sequelize
 router.get("/categories/:pageName", function(req, res) {
 
+  console.log("local Storage user id: " + localStorage.getItem("user_id"))
   // TODO: Call function inserted temporarily to set a value for user id of
   // current user.  This function will be removed after the login
   // code has been adjusted to store the actual value for user.
@@ -35,7 +36,8 @@ router.get("/categories/:pageName", function(req, res) {
     where: {
       UserId: {
         //$or: [null,1]}
-        $or: [null,currentUser]}
+        //$or: [null,currentUser]}
+        $or: [null,localStorage.getItem('user_id')]}
     },
     // Here we specify we want to return our categories in ascending order by description field
     order: [
@@ -69,7 +71,8 @@ router.post("/categories/create", function(req, res) {
   // Post to 
   db.Categories.create({
     description: req.body.description,
-    UserId: currentUser
+    //UserId: currentUser
+    UserId: localStorage.getItem('user_id')
   })
   // pass the result of our call
   .then(function(dbCategories) {
