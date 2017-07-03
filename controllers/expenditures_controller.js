@@ -13,7 +13,7 @@ var currentUser = "";
 var intBudgetId = ""
 
 //TODO: CALLS FUNCTION USED FOR DEVELOPMENT.  
-storeUserId();
+//storeUserId();
 
 router.get("/expenditures/view/setup", function(req, res){
   //call up the view page without rendering any hbs object
@@ -185,20 +185,20 @@ router.post("/expenditures/create", function(req, res) {
 //TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
 //MUST BE REMOVED LATER
 
-function storeUserId(){
+// function storeUserId(){
 
-  if (typeof localStorage === "undefined" || localStorage === null) {
+//   if (typeof localStorage === "undefined" || localStorage === null) {
     
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-  }
+//     var LocalStorage = require('node-localstorage').LocalStorage;
+//     localStorage = new LocalStorage('./scratch');
+//   }
    
-  localStorage.setItem('user_id', 1);
-  console.log('current user id ' + localStorage.getItem('user_id'));
+//   localStorage.setItem('user_id', 1);
+//   console.log('current user id ' + localStorage.getItem('user_id'));
 
-  currentUser = localStorage.getItem('user_id');
+//   currentUser = localStorage.getItem('user_id');
 
-};
+// };
 
 
 
