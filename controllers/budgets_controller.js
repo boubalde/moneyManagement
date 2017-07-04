@@ -4,22 +4,6 @@ var router = express.Router();
 // grabbing our models
 var db = require("../models");
 
-//var Sequelize = require('sequelize');
-
-//let {categories} = db.Categories;
-
-//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
-//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
-var currentUser = "";
-
-//TODO: CALLS FUNCTION USED FOR DEVELOPMENT.  
-//storeUserId();  Commented out by CR 06/25/17
-
-// get route -> index
-///router.get("/", function(req, res) {
-//   // send us to the next get function instead.
-//   res.redirect("/budgets");
-// });
 
 router.get("/budgets/view/setup", function(req, res){
   //call up the view page without rendering any hbs object
@@ -40,15 +24,16 @@ router.get("/budgets/view/list", function(req, res) {
         start_date: req.query.start_date,
         end_date: req.query.end_date
       },
-      include: [{model: db.Categories, attributes: ['description']}]
-
+      include: [{model: db.Categories, attributes: ['description']}],
+      order: [ [ db.Categories, 'description', 'ASC' ] ]
 
     })
     .then(function(dbBudgets) {
       var hbsObject = [];
 
 
-      for (var i = dbBudgets.length - 1; i >= 0; i--) {
+      //for (var i = dbBudgets.length - 1; i >= 0; i--) {
+      for (var i = 0; i< dbBudgets.length; i++) {
         let obj = {
           id: dbBudgets[i].id,
           description:dbBudgets[i].Category.dataValues.description,
@@ -119,31 +104,7 @@ router.post("/budgets/create", function(req, res) {
     });
   });
 
-// router.get("/graphs/view/setup", function(req, res){
-//   //call up the view page without rendering any hbs object
-//   // because we don't have a request body yet.
-//   res.render("graphsView","");
-// });
 
-
-
-//TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
-//MUST BE REMOVED LATER
-
-// function storeUserId(){
-
-//   if (typeof localStorage === "undefined" || localStorage === null) {
-    
-//     var LocalStorage = require('node-localstorage').LocalStorage;
-//     localStorage = new LocalStorage('./scratch');
-//   }
-   
-//   localStorage.setItem('user_id', 1);
-//   console.log('current user id ' + localStorage.getItem('user_id'));
-
-//   currentUser = localStorage.getItem('user_id');
-
-// };
 
 module.exports = router;
 

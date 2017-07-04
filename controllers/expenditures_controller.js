@@ -35,7 +35,8 @@ router.get("/expenditures/view/list", function(req, res) {
           $between:[req.query.start_date, req.query.end_date]
         }
       },
-      include: [{model: db.Categories, attributes: ['description']}]
+      include: [{model: db.Categories, attributes: ['description']}],
+      order: [ [ db.Categories, 'description', 'ASC' ],[ 'date_spent', 'ASC' ], ]
 
 
     })
@@ -43,7 +44,8 @@ router.get("/expenditures/view/list", function(req, res) {
       var hbsObject = [];
 
 
-      for (var i = dbExpenditures.length - 1; i >= 0; i--) {
+      //for (var i = dbExpenditures.length - 1; i >= 0; i--) {
+      for (var i=0; i < dbExpenditures.length; i++) {
         let obj = {
           id: dbExpenditures[i].id,
           description:dbExpenditures[i].Category.dataValues.description,
@@ -130,27 +132,7 @@ router.post("/expenditures/create", function(req, res) {
     
   });
 
-//   db.Expenditures.create({
 
-//     UserId: currentUser,
-//     date_spent: req.body.date_spent,
-//     amt_spent: req.body.amt_spent,
-//     CategoryId: req.body.category_id,
-//     BudgetId: intBudgetId
-//     //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
-//     //classMethods:req.body.classMethods
-//   })
-//   // pass the result of our call
-//   .then(function(dbExpenditures) {
-//     // log the result to our terminal/bash window
-//     console.log(dbExpenditures);
-//     //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
-//     //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
-//     //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
-//     // redirect
-//     //res.redirect("/");
-//   });
-// });
 
 
   // UPDATE 
@@ -169,7 +151,9 @@ router.post("/expenditures/create", function(req, res) {
       //res.json(dbExpenditures);
     });
     
-  });// DELETE
+  });
+
+  // DELETE
   router.delete("/expenditures/delete", function(req, res) {
     db.Expenditures.destroy({
       where: {
@@ -180,26 +164,6 @@ router.post("/expenditures/create", function(req, res) {
       //res.json(dbExpenditures);
     });
   });
-
-
-//TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
-//MUST BE REMOVED LATER
-
-// function storeUserId(){
-
-//   if (typeof localStorage === "undefined" || localStorage === null) {
-    
-//     var LocalStorage = require('node-localstorage').LocalStorage;
-//     localStorage = new LocalStorage('./scratch');
-//   }
-   
-//   localStorage.setItem('user_id', 1);
-//   console.log('current user id ' + localStorage.getItem('user_id'));
-
-//   currentUser = localStorage.getItem('user_id');
-
-// };
-
 
 
 module.exports = router;

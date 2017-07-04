@@ -10,7 +10,6 @@ var LocalStorage = require('node-localstorage').LocalStorage;  //added by CR 06/
 
   passport.serializeUser(function(user, done) {
           done(null, user.id);
-           console.log("User id: " + User.id);
 
       });
 
