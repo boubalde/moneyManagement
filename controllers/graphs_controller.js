@@ -16,7 +16,8 @@ router.get("/graphs/view/setup", function(req, res){
 router.get("/graphs/show", function(req, res){
   //res.render("graphsView","");
   var hbsObject = {
-  	Source1: "/assets/img/bank.jpg"
+  	source1: "/assets/img/BarGraph.png",
+  	source2: "/assets/img/PieChart.png"
   }
   console.log("Wow");
 

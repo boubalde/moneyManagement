@@ -85,8 +85,7 @@ router.post("/expenditures/create", function(req, res) {
       start_date: {$lte: req.body.date_spent},
       end_date: {$gte: req.body.date_spent}
     },
-    //LINE BELOW COMMENTED OUT BY CLAUDE; APPEARS UNNECESSARY HERE
-    //classMethods:req.body.classMethods
+
   })
   // pass the result of our call
   .then(function(dbBudgets) {
