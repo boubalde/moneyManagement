@@ -13,6 +13,21 @@ router.get("/graphs/view/setup", function(req, res){
 });
 
 
+router.get("/graphs/show", function(req, res){
+  //res.render("graphsView","");
+  var hbsObject = {
+  	source1: "/assets/img/BarGraph.png",
+  	source2: "/assets/img/PieChart.png"
+  }
+  console.log("Wow");
+
+  var GraphDisplay = {Graphs: hbsObject}
+
+  console.log(GraphDisplay);
+
+  res.render("graphsView", GraphDisplay);
+});
+
 
 module.exports = router;
 

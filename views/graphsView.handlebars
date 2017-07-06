@@ -15,10 +15,18 @@
             <ul class="nav navbar-nav">
                 <li><a class="theme" href="/signin">Sign In</a></li>
                 <li><a class="theme" href="/signup">Sign Up</a></li>
-                <li><a class="theme" href="#">Budgets</a></li>
-                <li><a class="theme" href="#">Expenditures</a></li>
-                <li><a class="theme" href="#">Graphs</a></li>
-                <li><a class="theme" href="logout">Sign Out</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Budgets<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/categories/budgetsCreate">Create Budget</a></li>
+                        <li><a href="/budgets/view/setup">View Budget</a></li>
+                    </ul>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Expenditures<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/categories/expendituresCreate">Enter Expenditures</a></li>
+                        <li><a href="/expenditures/view/setup">View Expenditures</a></li>
+                    </ul>
+                <li><a class="theme" href="/graphs/view/setup">Graphs</a></li>
+                <li><a class="theme" href="/logout">Sign Out</a></li>
             </ul>
         </div>
     </div>
@@ -30,7 +38,7 @@
 			<h1>Money Management Helper</h1>
 
 			<div class = "row">
-				<img class = "img-large" src="/assets/img/bank.jpg" alt="image not available">
+				<img class="img-medium" src="/assets/img/bank.jpg" alt="image not available">
 			</div>
 			<div class="row">
 				<h2>View Graphs</h2>
@@ -41,30 +49,28 @@
 	</div>
 
 	<div class="row">
-	    <form method="GET" action="/budgets/view/list?_method=GET" class="button">
+	    <form method="GET" action="/graphs/show?_method=GET" class="button">
+{{!-- 	    <form method="GET" action="" class="button">
+ --}}
 {{!-- 	    <form id="budgetView">
  --}}
 		    <div class="row">
-				<div class="col-md-2 col-md-offset-1">
+				<div class="col-md-1 col-md-offset-2">
 					<strong>Start date:</strong>
 				</div>
 				<div class="col-md-2">
 					<input type="date" name="start_date" id="start_date" required>
 				</div>
-			</div>
-		    <div class="row spacer">
-		    </div>
-			<div class="row">
-				<div class="col-md-2 col-md-offset-1">
+
+				<div class="col-md-1">
 					<strong>End date:</strong>
 				</div>
 				<div class="col-md-2">
 					<input type="date" name="end_date" id="end_date" required>
 				</div>
 			</div>
-
-
 			<div class="row">
+
 				<div class="col-md-10">
 					<center><button class="button" type="submit">Submit</button></center>
 				</div>
@@ -74,12 +80,16 @@
 	<div>
 
 	<div class="row">
-	    <div class="col-md-5">
+	    <div class="col-md-6">
 
-	    	<h4>Graph 1</h4>
-	    </div>
-	    <div class="col-md-5">
-	    	<h4>Graph 2</h4>
+	    	<h4><center>Graph 1</center></h4>
+{{!-- 	    		{{#each Graphs}}
+ --}}	    			<img class="graph1" src={{Graphs.source1}} alt="image not available">
+{{!-- 	    		{{/each}}
+ --}}	    </div>
+	    <div class="col-md-6">
+	    	<h4><center>Graph 2</center></h4>
+	    		<img class="graph1" src={{Graphs.source2}} alt="image not available">
 		<div>
 
 	</div>

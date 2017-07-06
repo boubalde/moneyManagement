@@ -77,6 +77,20 @@ h4{
   padding-bottom: 10px;
 }
 
+.img-medium{
+  display: block;
+  margin: auto;
+  width: 20%;
+  padding-bottom: 10px;
+}
+
+.graph1{
+  display: block;
+  margin: auto;
+  width: 98%;
+  padding-bottom: 10px;
+}
+
 .button{
   margin-top: 20px;
 }

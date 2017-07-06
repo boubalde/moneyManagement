@@ -51,6 +51,7 @@ app.get('/', function(req, res){
 
 app.get('/logout', function(req, res){
   console.log('logging out');
+  localStorage.removeItem('user_id');
   req.logout();
   res.redirect('/');
 });
