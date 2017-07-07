@@ -1,14 +1,13 @@
-<<<<<<< HEAD
-    var express = require("express");
-    var methodOverride = require("method-override");
-    var app        = express()
-    var passport   = require('passport')
-    var session    = require('express-session')
-    var bodyParser = require('body-parser')
-    var env        = require('dotenv').load()
-    var exphbs     = require('express-handlebars')
-    var path       = require("path")
-    var PORT = process.env.PORT || 8080;
+var express = require("express");
+var methodOverride = require("method-override");
+var app        = express();
+var passport   = require('passport');
+var session    = require('express-session');
+var bodyParser = require('body-parser');
+var env        = require('dotenv').load();
+var exphbs     = require('express-handlebars');
+var path       = require("path");
+var PORT = process.env.PORT || 3000;
 
 
 // bring in the models
@@ -46,28 +45,31 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 
-// app.get('/', function(req, res){
-//       res.render('/');
-//     });
+app.get('/', function(req, res){
+      res.render('index');
+    });
 
 app.get('/logout', function(req, res){
   console.log('logging out');
+  localStorage.removeItem('user_id');
   req.logout();
   res.redirect('/');
 });
 
-//Routes
-    var authRoute = require('./routes/passP.js')(app,passport);
+//Passport requirements
+var authRoute = require('./routes/passP.js')(app,passport);
 //load passport strategies
-    require('./config/passport.js')(passport,db.Users);
+    // require('./config/passport.js')(passport,db.Users);
+var strategies = require('./config/passport.js')(passport,db.Users);
 
 
-var routes = require("./controllers/categories_controller");
+//var routes = require("./controllers/categories_controller");
 
 var routes1 = require("./controllers/budgets_controller");
 var routes2 = require("./controllers/categories_controller");
 var routes3 = require("./controllers/expenditures_controller");
-var routes4= require("./controllers/users_controller");
+var routes4 = require("./controllers/users_controller");
+var routes5 = require("./controllers/graphs_controller");
 
 
 app.use("/", routes1);
@@ -91,11 +93,15 @@ app.use("/update", routes4);
 app.use("/create", routes4);
 app.use("/delete", routes4);
 
+app.use("/", routes5);
+app.use("/update", routes5);
+app.use("/create", routes5);
+app.use("/delete", routes5);
 
 
 
 db.sequelize.sync().then(function(){
-    console.log('Nice! Database looking good!')
+    console.log('Database connection successful')
 
     }).catch(function(err){
     console.log(err,"Something went wrong with the Database Update!")
@@ -103,8 +109,10 @@ db.sequelize.sync().then(function(){
 
 
 
-    app.listen(PORT, function(err){
-        if(!err)
-        console.log("Live on Port 8080"); else console.log(err)
-
-    });
+app.listen(PORT, function(err){
+    if(!err){
+        console.log("App listening on PORT: " + PORT);        }
+    else {
+        console.log(err)
+    }
+});

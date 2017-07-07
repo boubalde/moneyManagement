@@ -38,10 +38,10 @@
 			<h1>Money Management Helper</h1>
 
 			<div class = "row">
-				<img class = "img-large" src="/assets/img/bank.jpg" alt="image not available">
+				<img class="img-medium" src="/assets/img/bank.jpg" alt="image not available">
 			</div>
 			<div class="row">
-				<h2>View Budget Items</h2>
+				<h2>View Graphs</h2>
 			</div>
 		</div>
 	
@@ -49,30 +49,28 @@
 	</div>
 
 	<div class="row">
-	    <form method="GET" action="/budgets/view/list?_method=GET" class="button">
+	    <form method="GET" action="/graphs/show?_method=GET" class="button">
+{{!-- 	    <form method="GET" action="" class="button">
+ --}}
 {{!-- 	    <form id="budgetView">
  --}}
 		    <div class="row">
-				<div class="col-md-2 col-md-offset-1">
+				<div class="col-md-1 col-md-offset-2">
 					<strong>Start date:</strong>
 				</div>
 				<div class="col-md-2">
 					<input type="date" name="start_date" id="start_date" required>
 				</div>
-			</div>
-		    <div class="row spacer">
-		    </div>
-			<div class="row">
-				<div class="col-md-2 col-md-offset-1">
+
+				<div class="col-md-1">
 					<strong>End date:</strong>
 				</div>
 				<div class="col-md-2">
 					<input type="date" name="end_date" id="end_date" required>
 				</div>
 			</div>
-
-
 			<div class="row">
+
 				<div class="col-md-10">
 					<center><button class="button" type="submit">Submit</button></center>
 				</div>
@@ -82,30 +80,17 @@
 	<div>
 
 	<div class="row">
-	    <div class="col-md-10">
+	    <div class="col-md-6">
 
-	    	<h4>Budget List</h4>
-	    </div>
-		<div class="row">
-			{{#each Budgets}}
-	    	<div class="col-md-9 col-md-offset-1" id="budget-list">
-				<form method="POST" action="/budgets/update?_method=PUT" class="button">
-					<div class="col-md-2">
-						<input input type="hidden" name="budget_id" value={{this.id}}>
-						<label for="amt_budgeted">{{this.description}}</label>
-					</div>
-					<div class="col-md-3">
-						<input input type="text" name="amt_budgeted" value={{this.amt_budgeted}}>
-					</div>
-					<div class="col-md-2">
-						<button type="submit" class="btn btn-sm">Update</button>
-					</div>
-
-				</form>
-
-	    	</div>
-	    	{{/each}}
-	    </div>
+	    	<h4><center>Graph 1</center></h4>
+{{!-- 	    		{{#each Graphs}}
+ --}}	    			<img class="graph1" src={{Graphs.source1}} alt="image not available">
+{{!-- 	    		{{/each}}
+ --}}	    </div>
+	    <div class="col-md-6">
+	    	<h4><center>Graph 2</center></h4>
+	    		<img class="graph1" src={{Graphs.source2}} alt="image not available">
+		<div>
 
 	</div>
 

@@ -1,4 +1,5 @@
 var bCrypt = require('bcrypt-nodejs');
+var LocalStorage = require('node-localstorage').LocalStorage;  //added by CR 06/25/17
 
   module.exports = function(passport,user){
 // console.log(passport);
@@ -9,6 +10,7 @@ var bCrypt = require('bcrypt-nodejs');
 
   passport.serializeUser(function(user, done) {
           done(null, user.id);
+
       });
 
 
@@ -17,6 +19,16 @@ var bCrypt = require('bcrypt-nodejs');
       User.findById(id).then(function(user) {
         if(user){
           done(null, user.get());
+          //begin added by CR 06/25/17
+          console.log("User id: " + id);
+          //Place user id in local storage using node local-storage package
+          //Now user id can be accessed from any page in the app.
+          //User id is necessary to create and view budgets and expenditures
+          //pertinent to user.
+          localStorage = new LocalStorage('./scratch');
+          localStorage.setItem('user_id', id);
+          console.log("local storage user id: " + localStorage.getItem('user_id'));
+          //end added by CR 06/25/17
         }
         else{
           done(user.errors,null);
@@ -38,6 +50,7 @@ var bCrypt = require('bcrypt-nodejs');
        
 
       var generateHash = function(password) {
+
       return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
       };
 
@@ -100,6 +113,10 @@ var bCrypt = require('bcrypt-nodejs');
     var User = user;
 
     var isValidPassword = function(userpass,password){
+      console.log("email: " + email);
+      console.log("userpass: " + userpass);
+      console.log("password: " + password);
+
       return bCrypt.compareSync(password, userpass);
     }
 
@@ -108,8 +125,8 @@ var bCrypt = require('bcrypt-nodejs');
       if (!user) {
         return done(null, false, { message: 'Email does not exist' });
       }
-
       if (!isValidPassword(user.password,password)) {
+
 
         return done(null, false, { message: 'Incorrect password.' });
 

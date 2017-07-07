@@ -5,23 +5,6 @@ var router = express.Router();
 var db = require("../models");
 
 
-//var Sequelize = require('sequelize');
-
-//let {categories} = db.Categories;
-
-//TODO:  VARIABLE BELOW INSERTED FOR TESTING PURPOSES.  EITHER MUST BE REMOVED LATER, OR 
-//KEPT BUT SET EQUAL TO localStorage.getItem('user_id')
-var currentUser = "";
-
-//TODO: CALLS FUNCTION USED FOR DEVELOPMENT.  
-storeUserId();
-
-// get route -> index
-///router.get("/", function(req, res) {
-//   // send us to the next get function instead.
-//   res.redirect("/budgets");
-// });
-
 router.get("/budgets/view/setup", function(req, res){
   //call up the view page without rendering any hbs object
   // because we don't have a request body yet.
@@ -36,19 +19,21 @@ router.get("/budgets/view/list", function(req, res) {
   db.Budgets.findAll({
     // use promise method to pass the Budgets...
        where: {
-        UserId: currentUser,
+        //UserId: currentUser,
+        UserId: localStorage.getItem('user_id'),  //added by CR 06/25/17
         start_date: req.query.start_date,
         end_date: req.query.end_date
       },
-      include: [{model: db.Categories, attributes: ['description']}]
-
+      include: [{model: db.Categories, attributes: ['description']}],
+      order: [ [ db.Categories, 'description', 'ASC' ] ]
 
     })
     .then(function(dbBudgets) {
       var hbsObject = [];
 
 
-      for (var i = dbBudgets.length - 1; i >= 0; i--) {
+      //for (var i = dbBudgets.length - 1; i >= 0; i--) {
+      for (var i = 0; i< dbBudgets.length; i++) {
         let obj = {
           id: dbBudgets[i].id,
           description:dbBudgets[i].Category.dataValues.description,
@@ -88,8 +73,7 @@ router.post("/budgets/create", function(req, res) {
   .then(function(dbBudgets) {
     // log the result to our terminal/bash window
     console.log(dbBudgets);
-    // redirect
-    //res.redirect("/budgets/create");
+  //res.redirect("/categories/budgetsCreate");
   });
 });
 
@@ -121,69 +105,6 @@ router.post("/budgets/create", function(req, res) {
   });
 
 
-// get route, edited to match sequelize
-// router.get("/budgets/view/test", function(req, res) {
-
-//   console.log('start_date: ' + req.query.start_date);
-//   console.log('end_date: ' + req.query.end_date);
-//   db.Categories.findAll({
-//     // use promise method to pass the Budgets...
-//       // where: {
-//       //   UserId: currentUser,
-//       //   start_date: req.query.start_date,
-//       //   end_date: req.query.end_date
-//       // },
-//       //  where: {
-//       //   UserId: currentUser,
-//       //   start_date: req.query.start_date,
-//       //   end_date: req.query.end_date
-//       // },       //start_date: localStorage.getItem('start_date'),
-//         //end_date: localStorage.getItem('end_date')},
-//       // include: [{
-//       //     model: Categories,
-//       //     where: { Categories: Sequelize.col('CategoryId') }
-//       // }]
-//       include: [{model: db.Budgets, attributes: ['start_date']}]
-
-//     })
-//     .then(function(dbCategories) {
-//       var hbsObject = {
-//         Categories: dbCategories
-//       };
-//       // console.log("id: " + dbBudgets.id);
-//       // console.log("description: " + dbBudgets.description);
-//       // console.log("start_date: " + dbBudgets.start_date);
-//       // console.log("end_date: " + dbBudgets.end_date);
-//       // console.log("amt_budgeted: " + dbBudgets.amt_budgeted);
-//       // console.log("CategoryId: " + dbBudgets.CategoryId);
-//       // console.log("CreatedAt: ") + dbBudgets.createdAt;
-//       // console.log("list of all the Budgets");
-//       console.log("start_date: " + dbCategories.start_date);
-//       //console.log(dbCategories);
-
-
-//       //return res.render("budgetsView", hbsObject);
-      
-//   });
-// });
-
-//TODO: FUNCTION BELOW INSERTED TEMPORARILY FOR TESTING PURPOSES
-//MUST BE REMOVED LATER
-
-function storeUserId(){
-
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-  }
-   
-  localStorage.setItem('user_id', 1);
-  console.log('current user id ' + localStorage.getItem('user_id'));
-
-  currentUser = localStorage.getItem('user_id');
-
-};
 
 module.exports = router;
 
