@@ -1,8 +1,8 @@
 {
   "development": {
-
-    "password": "",
-    "database": "money_Management",
+    "username": "root",
+    "password": "sq5rel9%Top",
+    "database": "money_manage",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
