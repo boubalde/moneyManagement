@@ -9,6 +9,8 @@ For demo purposes, data has been entered for a user named Jane Doe.  You may sig
 email address:	janedoe@gmail.com
 password:		sun2brite
 
+Sample data for Jane Doe has been entered for period with a beginning date of 06/01/17 and end date of 06/30/17.
+
 Alternatively, you may sign up as a new user.
 
 2. To create a budget, navigate to the appropriate page using the menu bar at top of page.
