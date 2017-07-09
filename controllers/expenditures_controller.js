@@ -118,8 +118,6 @@ router.post("/expenditures/create", function(req, res) {
         // log the result to our terminal/bash window
         console.log(dbExpenditures);
 
-        //signals client that post response is finished
-        res.end();
         // redirects back to page that called post request
         res.redirect('back');
 
@@ -158,8 +156,6 @@ router.post("/expenditures/create", function(req, res) {
       }
     })
     .then(function(dbExpenditures) {
-      //signals client that post response is finished
-      res.end();
       // redirects back to page page that called post request
       res.redirect('back');
     });

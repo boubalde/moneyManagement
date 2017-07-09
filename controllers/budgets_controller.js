@@ -92,8 +92,6 @@ router.post("/budgets/create", function(req, res) {
       }
     })
     .then(function(dbBudgets) {
-       //signals client that post response is finished
-      res.end();
       // redirects back to page that called post request
       res.redirect('back');
 
@@ -109,8 +107,6 @@ router.post("/budgets/create", function(req, res) {
       }
     })
     .then(function(dbBudgets) {
-      //signals client that post response is finished
-      res.end();
       // redirects back to page page that called post request
       res.redirect('back');
 
