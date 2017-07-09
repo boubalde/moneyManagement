@@ -73,8 +73,6 @@ router.post("/budgets/create", function(req, res) {
   .then(function(dbBudgets) {
     // log the result to our terminal/bash window
     console.log(dbBudgets);
-    //signals client that post response is finished
-    //res.sendStatus(200);
     // redirects back to page that called post request
     res.redirect('back');
 

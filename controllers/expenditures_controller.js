@@ -140,8 +140,6 @@ router.post("/expenditures/create", function(req, res) {
       }
     })
     .then(function(dbExpenditures) {
-      //signals client that post response is finished
-      res.end();
       // redirects back to page that called post request
       res.redirect('back');
     });
