@@ -76,7 +76,7 @@ router.post("/budgets/create", function(req, res) {
     //signals client that post response is finished
     res.sendStatus(200);
     // redirects back to page that called post request
-    res.redirect('back');
+    res.redirect("/categories/budgetsCreate");
 
   });
 });
