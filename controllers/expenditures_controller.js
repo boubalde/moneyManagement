@@ -92,11 +92,7 @@ router.post("/expenditures/create", function(req, res) {
     // log the result to our terminal/bash window
     intBudgetId  = dbBudgets.id;
     console.log("BudgetId: " + intBudgetId);
-    //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
-    //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
-    //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
-    // redirect
-    //res.redirect("/");
+
   // The expenditure creation has been chained here to ensure that 
   // it will execute only after the integer variable intBudgetId has
   // been assigned a value.  This value is required in the expenditures
@@ -121,17 +117,16 @@ router.post("/expenditures/create", function(req, res) {
       .then(function(dbExpenditures) {
         // log the result to our terminal/bash window
         console.log(dbExpenditures);
-      //   //TODO - DON'T REDIRECT AUTOMATICALLY TO HOME PAGE.
-      //   //TODO - LET USER USE MENU TO GO BACK TO HOME IN CASE
-      //   //TODO - USER WANTS TO STAY ON PAGE AND ENTER MORE EXPENDITURES
-      //   // redirect
-      //   //res.redirect("/");
+
+        //signals client that post response is finished
+        res.end();
+        // redirects back to page that called post request
+        res.redirect('back');
+
       });
     });
     
   });
-
-
 
 
   // UPDATE 
@@ -147,7 +142,10 @@ router.post("/expenditures/create", function(req, res) {
       }
     })
     .then(function(dbExpenditures) {
-      //res.json(dbExpenditures);
+      //signals client that post response is finished
+      res.end();
+      // redirects back to page that called post request
+      res.redirect('back');
     });
     
   });
@@ -160,7 +158,10 @@ router.post("/expenditures/create", function(req, res) {
       }
     })
     .then(function(dbExpenditures) {
-      //res.json(dbExpenditures);
+      //signals client that post response is finished
+      res.end();
+      // redirects back to page page that called post request
+      res.redirect('back');
     });
   });
 
